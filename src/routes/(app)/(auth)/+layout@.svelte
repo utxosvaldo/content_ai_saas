@@ -1,6 +1,8 @@
 <script>
 	import { toast, Toaster } from 'svelte-sonner';
+
+	let { children } = $props();
 </script>
 
 <Toaster theme='dark' />
-<slot></slot>
+{@render children?.()}

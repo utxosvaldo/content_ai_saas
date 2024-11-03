@@ -12,7 +12,7 @@
 	// import { enhance } from '$app/forms';
 	import { toast } from 'svelte-sonner';
 
-	export let data;
+	let { data } = $props();
 	let dataForm: SuperValidated<Infer<FormSchema>> = data.form;
 	let form = superForm(dataForm, {
 		validators: zodClient(formSchema),
@@ -35,8 +35,8 @@
 
 	const { form: formData, enhance } = form;
 
-	let loading = false;
-	let isFormLoading = false;
+	let loading = $state(false);
+	let isFormLoading = $state(false);
 	let githubSignIn = async () => {
 		loading = true;
 		await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -63,9 +63,11 @@
 		<!-- Form -->
 		<form method="POST" use:enhance>
 			<Form.Field {form} name="email" class="mb-4">
-				<Form.Control let:attrs>
-					<Input placeholder="name@example.com" {...attrs} bind:value={$formData.email} />
-				</Form.Control>
+				<Form.Control >
+					{#snippet children({ attrs })}
+										<Input placeholder="name@example.com" {...attrs} bind:value={$formData.email} />
+														{/snippet}
+								</Form.Control>
 				<!-- <Form.Description>This is your email address.</Form.Description> -->
 				<Form.FieldErrors />
 			</Form.Field>
@@ -79,7 +81,7 @@
 		<!-- Separator -->
 		<div class="relative">
 			<div class="absolute inset-0 flex items-center">
-				<span class="w-full border-t" />
+				<span class="w-full border-t"></span>
 			</div>
 			<div class="relative flex justify-center text-xs uppercase">
 				<span class="bg-background px-2 text-muted-foreground"> Or continue with </span>

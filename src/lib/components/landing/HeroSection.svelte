@@ -9,7 +9,7 @@
 	// Images
 	import HeroDarkImg from '$lib/imgs/hero-dark.png';
 	import HeroLightImg from '$lib/imgs/hero-light.png';
-	let inView = false;
+	let inView = $state(false);
 	const handleChange = ({ detail }: CustomEvent<ObserverEventDetails>) => {
 		// console.log(detail);
 		inView = detail.inView;
@@ -58,7 +58,7 @@
 			unobserveOnEnter: true,
 			rootMargin: '-100px'
 		}}
-		on:inview_change={handleChange}
+		oninview_change={handleChange}
 		class="relative mt-32 animate-fade-up opacity-0 [--animation-delay:400ms] [perspective:2000px] after:absolute after:inset-0 after:z-50 after:[background:linear-gradient(to_top,hsl(var(--background))_30%,transparent)]"
 	>
 		<div

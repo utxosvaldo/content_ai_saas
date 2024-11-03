@@ -27,7 +27,7 @@
 		}
 	];
 
-	let hamburgerMenuIsOpen = false;
+	let hamburgerMenuIsOpen = $state(false);
 
 	function toggleOverflowHidden(node: HTMLElement) {
 		node.addEventListener('click', () => {
@@ -42,7 +42,7 @@
 			}
 		});
 	}
-	let innerWidth = 0;
+	let innerWidth = $state(0);
 </script>
 
 <svelte:window bind:innerWidth />
